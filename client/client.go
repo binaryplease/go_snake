@@ -14,7 +14,6 @@ var gc = GetGameClient()
 
 func main() {
 
-	fmt.Println("test")
 	initGame()
 
 	//Get playfield from server
@@ -35,6 +34,7 @@ func initGame() {
 		panic(err)
 	}
 	termbox.SetInputMode(termbox.InputEsc)
+	clearScreen()
 }
 
 func handleInput() {
@@ -63,9 +63,12 @@ func handleInput() {
 
 func printGameInfo() {
 	fmt.Println("ASCII SNAKE")
-	fmt.Println("")
+	fmt.Println("Connected to: " + gs.connHost)
+	fmt.Println()
 	fmt.Println("Use arrow keys")
 	fmt.Println("Press Esc to exit")
+	fmt.Println()
+	fmt.Println()
 }
 
 func updateScreen() {

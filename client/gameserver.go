@@ -9,21 +9,24 @@ import (
 type gameServer struct {
 	connToServer   net.Conn
 	connFromServer net.Conn
+	connHost       string
+	connPort       string
+	connType       string
 }
 
 //GetGameServer constructor for Gameserver
 func GetGameServer() gameServer {
 	gs := gameServer{}
+	gs.connHost = "localhost"
+	gs.connPort = "9000"
+	gs.connType = "tcp"
 	gs.connect()
 	return gs
 }
 
 func (gs gameServer) connect() {
-	var connHost = "localhost"
-	var connPort = "9000"
-	var connType = "tcp"
 
-	l, err := net.Listen(connType, connHost+":"+connPort)
+	l, err := net.Listen(gs.connType, gs.connHost+":"+gs.connPort)
 	if err != nil {
 		panic(err)
 	}
