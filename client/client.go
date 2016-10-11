@@ -73,9 +73,10 @@ func updateScreen() {
 	for {
 
 		printGameInfo()
-		for i := 0; i < 10; i++ {
-			for j := 0; j < 10; j++ {
-				fmt.Printf(codeToBlock(playField[i][j]))
+
+		for _, h := range gc.playField {
+			for _, cell := range h {
+				fmt.Printf(codeToBlock(cell))
 			}
 			fmt.Printf("\n")
 		}
@@ -99,8 +100,14 @@ func clearScreen() {
 }
 
 func codeToBlock(i int) string {
-	if i == 1 {
-		return "██"
+
+	switch i {
+	case 1:
+		return "█"
+	case 2:
+		return "@"
+	case 3:
+		return "="
 	}
-	return "░░"
+	return "░"
 }
