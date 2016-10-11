@@ -1,8 +1,8 @@
 package main
 
 import (
-	"fmt"
-	"io"
+	_ "fmt"
+	_ "io"
 	"net"
 )
 
@@ -30,16 +30,16 @@ func (gs gameServer) connect() {
 
 	defer l.Close()
 
-	for {
-		// Listen for an incoming connection.
-		gs.connFromServer, err = l.Accept()
-		if err != nil {
-			panic(err)
-		}
-		// Handle connections in a new goroutine.
+	//for {
+	//// Listen for an incoming connection.
+	//gs.connFromServer, err = l.Accept()
+	//if err != nil {
+	//panic(err)
+	//}
+	//// Handle connections in a new goroutine.
 
-		defer gs.connFromServer.Close()
-	}
+	//defer gs.connFromServer.Close()
+	//}
 
 }
 
@@ -48,5 +48,5 @@ func (gs gameServer) getPlayfield() [][]int {
 }
 
 func (gs gameServer) sendString(input string) {
-	io.WriteString(gs.connToServer, fmt.Sprint(input))
+	//io.WriteString(gs.connToServer, fmt.Sprint(input))
 }

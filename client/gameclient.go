@@ -12,13 +12,15 @@ var playField = [][]int{
 	{1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 	{1, 1, 1, 1, 1, 1, 1, 1, 1, 1}}
 
-type gameClient struct {
+//GameClient object
+type GameClient struct {
 	playField [][]int
 }
 
 //GetGameClient constructor for gameClients
-func GetGameClient() gameClient {
-	gc := gameClient{}
+func GetGameClient() GameClient {
+	gc := GameClient{}
 	gc.playField = playField
+	return gc
 
 }

@@ -4,6 +4,7 @@ import (
 	"fmt"
 	tm "github.com/buger/goterm"
 	"github.com/nsf/termbox-go"
+	"os"
 	"time"
 )
 
@@ -13,6 +14,7 @@ var gc = GetGameClient()
 
 func main() {
 
+	fmt.Println("test")
 	initGame()
 
 	//Get playfield from server
@@ -22,7 +24,9 @@ func main() {
 	go updateScreen()
 	//Send input to server
 	go handleInput()
-	time.Sleep(10 * time.Second)
+
+	for {
+	}
 }
 
 func initGame() {
@@ -31,7 +35,6 @@ func initGame() {
 		panic(err)
 	}
 	termbox.SetInputMode(termbox.InputEsc)
-	defer termbox.Close()
 }
 
 func handleInput() {
@@ -41,8 +44,8 @@ func handleInput() {
 		case termbox.EventKey:
 			switch ev.Key {
 			case termbox.KeyEsc:
-				fmt.Println("esc pressed")
 				gs.sendString("escape")
+				os.Exit(0)
 			case termbox.KeyArrowLeft:
 				gs.sendString("left")
 			case termbox.KeyArrowRight:
@@ -58,11 +61,18 @@ func handleInput() {
 	}
 }
 
+func printGameInfo() {
+	fmt.Println("ASCII SNAKE")
+	fmt.Println("")
+	fmt.Println("Use arrow keys")
+	fmt.Println("Press Esc to exit")
+}
+
 func updateScreen() {
 
 	for {
-		clearScreen()
 
+		printGameInfo()
 		for i := 0; i < 10; i++ {
 			for j := 0; j < 10; j++ {
 				fmt.Printf(codeToBlock(playField[i][j]))
@@ -70,13 +80,15 @@ func updateScreen() {
 			fmt.Printf("\n")
 		}
 		time.Sleep(screenRefreshRate)
+		clearScreen()
 	}
 }
 
 func updatePlayfield() {
 	for {
+
 		//Read from channel
-		playField
+		//playField
 	}
 }
 
